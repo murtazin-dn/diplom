@@ -1,8 +1,11 @@
 package com.example.diplom.di
 
 import com.example.diplom.BuildConfig
-import com.example.diplom.data.network.ApiClient
-import com.example.diplom.data.network.ApiService
+import com.example.diplom.data.network.auth.repository.AuthService
+import com.example.diplom.data.network.categories.repository.CategoryService
+import com.example.diplom.util.BASE_URL
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -12,13 +15,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 val networkModule = module {
     single { provideOkHttpClient() }
-    single { provideRetrofit( okHttpClient = get(), BuildConfig.BASE_URL) }
-    single { provideApiService( retrofit = get()) }
-    single { provideApiClient(apiService = get()) }
+    single { provideRetrofit( okHttpClient = get()) }
+    single { provideAuthService( retrofit = get()) }
+    single { provideCategoryService( retrofit = get()) }
 }
-
-private fun provideApiClient(apiService: ApiService) = ApiClient(apiService)
-
 private fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
     val loggingInterceptor = HttpLoggingInterceptor()
     loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -30,14 +30,18 @@ private fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
     .build()
 
 private fun provideRetrofit(
-    okHttpClient: OkHttpClient,
-    BASE_URL: String
+    okHttpClient: OkHttpClient
 ): Retrofit =
     Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(
+            Moshi.Builder().addLast(KotlinJsonAdapterFactory()
+        ).build()))
         .baseUrl(BASE_URL)
         .client(okHttpClient)
         .build()
 
-private fun provideApiService(retrofit: Retrofit): ApiService =
-    retrofit.create(ApiService::class.java)
+private fun provideAuthService(retrofit: Retrofit): AuthService =
+    retrofit.create(AuthService::class.java)
+
+private fun provideCategoryService(retrofit: Retrofit): CategoryService =
+    retrofit.create(CategoryService::class.java)

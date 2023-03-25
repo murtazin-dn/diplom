@@ -3,4 +3,23 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <!-- Strings related to login -->
+    <string name="error_try_again">Ошибка, повторите попытку позже</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="action_sign_up">Зарегистрироваться</string>
+    <string name="empty_fields">Поля не должны быть пустыми</string>
+    <string name="invalid_credentials">Неверный логин или пароль</string>
+    <string name="invalid_email">Некорректный email</string>
+    <string name="short_password">Длина пароля должна быть не меньше 8 символов</string>
+    <string name="long_password">Длина пароля должна быть не больше 50 символов</string>
+
+
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+
+    <string name="welcome">"Welcome!"</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="prompt_date_of_birthday">День рождения</string>
+    <string name="prompt_category">Специализация</string>
 </resources>

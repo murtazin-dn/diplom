@@ -8,6 +8,10 @@ import com.example.diplom.util.TokenService
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val repositoryModule = module {
-    includes(listOf(authModule, categoryModule))
+val authModule = module{
+    single<AuthRepository> { AuthRepositoryImpl( authService = get()) }
+    single { TokenService(context = androidContext()) }
+    single { SignUpUseCase(authRepository = get()) }
+    single { SignInUseCase(authRepository = get()) }
+
 }
