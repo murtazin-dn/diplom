@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface AuthRepository {
     suspend fun signUp(signUpRequest: SignUpRequest): Flow<Response<AuthResponse>>
     suspend fun signIn(signInRequest: SignInRequest): Flow<Response<AuthResponse>>
+    suspend fun isTakenEmail(email: String): Flow<Response<Boolean>>
 }

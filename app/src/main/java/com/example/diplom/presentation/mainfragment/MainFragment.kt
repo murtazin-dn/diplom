@@ -9,6 +9,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.diplom.R
 import com.example.diplom.databinding.FragmentMainBinding
+import com.example.diplom.presentation.HideBottomNavMenu
+import com.example.diplom.presentation.MainActivity
+import com.example.diplom.presentation.ShowBottomNavMenu
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainFragment : Fragment() {
@@ -23,6 +26,22 @@ class MainFragment : Fragment() {
     ): View? {
         _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).hideBottomNavMenu = HideBottomNavMenu{
+            binding.navView.visibility = View.GONE
+        }
+        (activity as MainActivity).showBottomNavMenu = ShowBottomNavMenu{
+            binding.navView.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).hideBottomNavMenu = null
+        (activity as MainActivity).showBottomNavMenu = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

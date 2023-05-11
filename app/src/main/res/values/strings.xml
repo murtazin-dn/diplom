@@ -1,25 +1,59 @@
 <resources>
     <string name="app_name">diplom</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <!-- Strings related to login -->
+    <string name="title_news">Новости</string>
+    <string name="title_actual">Актуальное</string>
+    <string name="title_home">Главная</string>
+    <string name="title_messages">Сообщения</string>
+    <string name="title_my_profile">Профиль</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_comments">Комментарии</string>
+    <string name="title_signin">Вход</string>
+    <string name="title_signup">Регистрация</string>
+    <string name="title_edit_profile">Редактировать профиль</string>
+
     <string name="error_try_again">Ошибка, повторите попытку позже</string>
+    <!-- Strings related to login -->
     <string name="action_sign_in">Войти</string>
     <string name="action_sign_up">Зарегистрироваться</string>
-    <string name="empty_fields">Поля не должны быть пустыми</string>
+    <string name="empty_fields">Поле не должны быть пустыми</string>
     <string name="invalid_credentials">Неверный логин или пароль</string>
     <string name="invalid_email">Некорректный email</string>
     <string name="short_password">Длина пароля должна быть не меньше 8 символов</string>
     <string name="long_password">Длина пароля должна быть не больше 50 символов</string>
+    <string name="error_confirm_password">Пароль не подтвержден</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="error_upper_case_name">Имя должно начинаться с большой буквы</string>
+    <string name="error_upper_case_surname">Фамилия должно начинаться с большой буквы</string>
+    <string name="long_surname">Фамилия должна быть не больше 50 символов</string>
+    <string name="long_name">Имя должно быть не больше 50 символов</string>
+    <string name="invalid_name">Некорректное имя</string>
+    <string name="invalid_surname">Некорректная фамилия</string>
+    <string name="invalid_date_of_birthday">Некорректная дата рождения</string>
+    <string name="taken_email">Аккаунт с таким email уже существует</string>
 
 
+    <string name="publish">Опубликовать</string>
 
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
 
     <string name="welcome">"Welcome!"</string>
     <string name="login_failed">"Login failed"</string>
     <string name="prompt_date_of_birthday">День рождения</string>
     <string name="prompt_category">Специализация</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="edit">Редактировать</string>
+    <string name="logout">Выйти из аккаунта</string>
+    <string name="edit_photo">Изменить фото</string>
+    <string name="write_message">Напишите сообщение</string>
+    <string name="write_comment">Напишите комментарий</string>
+    <string name="send_message">Написать</string>
+    <string name="subscribe">Подписаться</string>
+    <string name="unsubscribe">Отписаться</string>
+    <string name="title">Заголовок</string>
+    <string name="text">Текст</string>
+    <string name="new_post">Новая публикация</string>
+    <string name="long_title">Длина заголовка не должна превышать 200 символов</string>
+    <string name="search">Поиск</string>
 </resources>

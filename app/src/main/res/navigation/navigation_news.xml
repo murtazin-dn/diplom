@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_news"
+    app:startDestination="@id/news_fragment">
+    <fragment
+        android:id="@+id/news_fragment"
+        android:name="com.example.diplom.presentation.home.NewsFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_news_fragment_to_postFragment2"
+            app:destination="@id/postFragment2" />
+        <action
+            android:id="@+id/action_news_fragment_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_news_fragment_to_navigation_profile_flow"
+            app:destination="@id/navigation_profile_flow" />
+    </fragment>
+    <fragment
+        android:id="@+id/postFragment2"
+        android:name="com.example.diplom.presentation.post.PostFragment"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" />
+    <include app:graph="@navigation/navigation_profile" />
+    <include app:graph="@navigation/navigation_profile_flow" />
+</navigation>

@@ -9,5 +9,16 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    includes(listOf(authModule, categoryModule))
+    single { TokenService(androidContext()) }
+    includes(
+        listOf(
+            authModule,
+            categoryModule,
+            personInfoModule,
+            postsModule,
+            chatModule,
+            messagesModule,
+            subscribersModule
+        )
+    )
 }

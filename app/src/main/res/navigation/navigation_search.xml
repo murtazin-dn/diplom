@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_search"
+    app:startDestination="@id/subscribersFragment">
+    <fragment
+        android:id="@+id/subscribersFragment"
+        android:name="com.example.diplom.presentation.subscribers.SearchFragment"
+        android:label="fragment_subscribers"
+        tools:layout="@layout/fragment_subscribers" >
+        <action
+            android:id="@+id/action_subscribersFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+        <action
+            android:id="@+id/action_subscribersFragment_to_navigation_profile_flow"
+            app:destination="@id/navigation_profile_flow" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment2"
+        android:name="com.example.diplom.presentation.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <include app:graph="@navigation/navigation_profile_flow" />
+</navigation>

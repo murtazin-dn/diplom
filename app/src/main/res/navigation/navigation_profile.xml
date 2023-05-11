@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_profile"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/my_profile_fragment">
+    <fragment
+        android:id="@+id/my_profile_fragment"
+        android:name="com.example.diplom.presentation.myprofile.MyProfileFragment"
+        android:label="@string/title_my_profile"
+        tools:layout="@layout/fragment_my_profile" >
+        <action
+            android:id="@+id/action_my_profile_fragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_my_profile_fragment_to_editPersonInfoFragment"
+            app:destination="@id/editPersonInfoFragment" />
+        <action
+            android:id="@+id/action_my_profile_fragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.diplom.presentation.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/editPersonInfoFragment"
+        android:name="com.example.diplom.presentation.editpersoninfo.EditPersonInfoFragment"
+        android:label="fragment_edit_person_info"
+        tools:layout="@layout/fragment_edit_person_info" />
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.example.diplom.presentation.createpost.CreatePostFragment"
+        android:label="fragment_create_post"
+        tools:layout="@layout/fragment_create_post" />
+</navigation>

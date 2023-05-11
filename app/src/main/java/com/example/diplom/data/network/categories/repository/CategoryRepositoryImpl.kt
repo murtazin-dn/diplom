@@ -1,6 +1,5 @@
 package com.example.diplom.data.network.categories.repository
 
-import com.example.diplom.data.network.categories.model.response.CategoriesResponse
 import com.example.diplom.data.network.categories.model.response.CategoryResponse
 import com.example.diplom.data.network.util.Response
 import com.example.diplom.domain.category.repository.CategoryRepository
@@ -10,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 class CategoryRepositoryImpl(
     private val categoryService: CategoryService
 ): CategoryRepository {
-    override suspend fun getCategories(): Flow<Response<CategoriesResponse>> {
+    override suspend fun getCategories(): Flow<Response<List<CategoryResponse>>> {
         return flow {
             val response = categoryService.getCategories()
             if (response.isSuccessful){

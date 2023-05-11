@@ -7,22 +7,15 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.diplom.presentation.signup.SignUpFragment"
+        android:name="com.example.diplom.presentation.auth.signup.SignUpFragment"
         android:label="SignUpFragment" />
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.diplom.presentation.signin.SignInFragment"
+        android:name="com.example.diplom.presentation.auth.signin.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.diplom.presentation.mainfragment.MainFragment"
-        android:label="MainFragment" />
 </navigation>

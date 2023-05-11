@@ -25,6 +25,24 @@ class TokenService(context: Context) {
         }.apply()
     }
 
+    fun saveUserId(id: Long){
+        put(USER_ID, id)
+    }
+
+    fun getUserId(): Long {
+        return get(USER_ID, Long::class.java)
+    }
+
+    fun containsUserId(): Boolean{
+        return sharedPref.contains(USER_ID)
+    }
+
+    fun clearUserId() {
+        sharedPref.edit().run {
+            remove(USER_ID)
+        }.apply()
+    }
+
     private fun <T> get(key: String, clazz: Class<T>): T =
         when (clazz) {
             String::class.java -> sharedPref.getString(key, "")
