@@ -18,7 +18,8 @@ val repositoryModule = module {
             postsModule,
             chatModule,
             messagesModule,
-            subscribersModule
+            subscribersModule,
+            notificationsModule
         )
     )
 }

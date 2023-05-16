@@ -5,6 +5,7 @@ import com.example.diplom.data.network.auth.repository.AuthService
 import com.example.diplom.data.network.categories.repository.CategoryService
 import com.example.diplom.data.network.chats.repository.ChatService
 import com.example.diplom.data.network.messages.repository.MessagesService
+import com.example.diplom.data.network.notifications.repository.NotificationsService
 import com.example.diplom.data.network.personinfo.repository.PersonInfoService
 import com.example.diplom.data.network.posts.repository.PostService
 import com.example.diplom.data.network.subscribers.repository.SubscribersService
@@ -28,6 +29,7 @@ val networkModule = module {
     single { provideChatService( retrofit = get()) }
     single { provideMessagesService( retrofit = get()) }
     single { provideSubscribersService(retrofit = get()) }
+    single { provideNotificationsService(retrofit = get()) }
 }
 private fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
     val loggingInterceptor = HttpLoggingInterceptor()
@@ -70,3 +72,6 @@ private fun provideMessagesService(retrofit: Retrofit): MessagesService =
 
 private fun provideSubscribersService(retrofit: Retrofit): SubscribersService =
     retrofit.create(SubscribersService::class.java)
+
+private fun provideNotificationsService(retrofit: Retrofit): NotificationsService =
+    retrofit.create(NotificationsService::class.java)

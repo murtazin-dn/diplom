@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.diplom.presentation.prifile.ProfileFragment"
+        android:name="com.example.diplom.presentation.ui.prifile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment3"
-        android:name="com.example.diplom.presentation.chat.ChatFragment"
+        android:name="com.example.diplom.presentation.ui.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/postFragment"
-        android:name="com.example.diplom.presentation.post.PostFragment"
+        android:name="com.example.diplom.presentation.ui.post.PostFragment"
         android:label="fragment_post"
         tools:layout="@layout/fragment_post" >
         <action

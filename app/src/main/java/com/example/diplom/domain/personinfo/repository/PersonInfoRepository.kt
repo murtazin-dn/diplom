@@ -11,4 +11,5 @@ interface PersonInfoRepository {
     suspend fun getProfile(userId: Long): Flow<Response<ProfileResponse>>
     suspend fun findUsers(text: String): Flow<Response<List<ProfileResponse>>>
     suspend fun uploadUserPhoto(file: File): Flow<Response<String>>
+    suspend fun uploadPhoto(file: File): Flow<Response<String>>
 }

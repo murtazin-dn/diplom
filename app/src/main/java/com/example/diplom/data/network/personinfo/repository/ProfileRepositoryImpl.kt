@@ -78,4 +78,27 @@ class ProfileRepositoryImpl(
             }
         }
     }
+
+    override suspend fun uploadPhoto(file: File): Flow<Response<String>> {
+        return flow{
+            val token = tokenService.getToken()
+            if (file.exists()) {
+                val filePart = createFormData(
+                    "file",
+                    file.name,
+                    file.asRequestBody()
+                )
+                val response = service.uploadPhoto("Bearer $token", filePart)
+                if(response.isSuccessful){
+                    val data = response.body()!!
+                    emit(Response.Success(data.name))
+                }else{
+                    emit(Response.Error(response.code(), response.errorBody().toString()))
+                }
+            }
+            else{
+                throw FileIsMissingException()
+            }
+        }
+    }
 }

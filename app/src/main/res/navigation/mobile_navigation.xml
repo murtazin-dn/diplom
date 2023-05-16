@@ -6,24 +6,9 @@
     app:startDestination="@+id/navigation_news">
 
 
-    <navigation android:id="@+id/navigation_chats"
-        app:startDestination="@id/chats_fragment">
-        <fragment
-            android:id="@+id/chats_fragment"
-            android:name="com.example.diplom.presentation.chats.ChatsFragment"
-            android:label="@string/title_messages"
-            tools:layout="@layout/fragment_chats" >
-            <action
-                android:id="@+id/action_chats_fragment_to_chatFragment"
-                app:destination="@id/chatFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/chatFragment"
-            android:name="com.example.diplom.presentation.chat.ChatFragment"
-            android:label="fragment_chat"
-            tools:layout="@layout/fragment_chat" />
-    </navigation>
+
     <include app:graph="@navigation/navigation_news" />
+    <include app:graph="@navigation/navigation_chats" />
     <include app:graph="@navigation/navigation_search" />
     <include app:graph="@navigation/navigation_profile" />
 

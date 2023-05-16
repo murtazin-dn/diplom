@@ -25,6 +25,24 @@ class TokenService(context: Context) {
         }.apply()
     }
 
+    fun saveFCMToken(token: String){
+        put(FCM_TOKEN, token)
+    }
+
+    fun getFCMToken(): String {
+        return get(FCM_TOKEN, String::class.java)
+    }
+
+    fun containsFCMToken(): Boolean{
+        return sharedPref.contains(FCM_TOKEN)
+    }
+
+    fun clearFCMToken() {
+        sharedPref.edit().run {
+            remove(FCM_TOKEN)
+        }.apply()
+    }
+
     fun saveUserId(id: Long){
         put(USER_ID, id)
     }

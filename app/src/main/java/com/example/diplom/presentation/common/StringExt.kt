@@ -1,6 +1,7 @@
 package com.example.diplom.presentation.common
 
 import android.text.Editable
+import com.example.diplom.util.BASE_URL
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -22,3 +23,5 @@ fun String.toEpochSeconds(): Long {
     val localDate = LocalDate.parse(this, DateTimeFormatter.ofPattern("dd.MM.yyyy"))
     return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond
 }
+
+fun String.toPhotoURL(): String = "${BASE_URL}image/$this"

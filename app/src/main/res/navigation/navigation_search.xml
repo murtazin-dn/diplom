@@ -6,7 +6,7 @@
     app:startDestination="@id/subscribersFragment">
     <fragment
         android:id="@+id/subscribersFragment"
-        android:name="com.example.diplom.presentation.subscribers.SearchFragment"
+        android:name="com.example.diplom.presentation.ui.subscribers.SearchFragment"
         android:label="fragment_subscribers"
         tools:layout="@layout/fragment_subscribers" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment2"
-        android:name="com.example.diplom.presentation.chat.ChatFragment"
+        android:name="com.example.diplom.presentation.ui.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <include app:graph="@navigation/navigation_profile_flow" />

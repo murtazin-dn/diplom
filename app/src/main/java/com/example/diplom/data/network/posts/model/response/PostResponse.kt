@@ -13,5 +13,6 @@ data class PostResponse(
     val timeAtCreation: Long,
     var likesCount: Long,
     var commentsCount: Long,
-    var isLikeEnabled: Boolean
+    var isLikeEnabled: Boolean,
+    val images: List<String>
 ): PostCommentItem

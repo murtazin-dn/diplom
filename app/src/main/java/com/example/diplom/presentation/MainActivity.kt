@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.diplom.R
 import com.example.diplom.data.network.chats.model.response.ChatResponse
 import com.example.diplom.databinding.ActivityMainBinding
+import com.example.diplom.presentation.common.toPhotoURL
 import com.example.diplom.util.BASE_URL
 import com.google.android.material.appbar.MaterialToolbar
 
@@ -67,10 +68,9 @@ class MainActivity : AppCompatActivity() {
     fun setChatInfo(chat: ChatResponse){
         binding.chatToolbar.tvUserNameToolbar.text = "${chat.secondUser.name} ${chat.secondUser.surname}"
         if(!chat.secondUser.icon.isNullOrBlank()) {
-            val imgAddress = "${BASE_URL}users/photo/${chat.secondUser.icon}"
             Glide
                 .with(this)
-                .load(imgAddress)
+                .load(chat.secondUser.icon.toPhotoURL())
                 .into(binding.chatToolbar.imgUserIconToolbar)
         }else{
             Glide
@@ -125,6 +125,10 @@ class MainActivity : AppCompatActivity() {
 
     fun hideUpButton() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    companion object{
+        var currentChatId: Long? = null
     }
 }
 

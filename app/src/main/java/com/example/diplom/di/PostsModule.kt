@@ -3,6 +3,7 @@ package com.example.diplom.di
 import com.example.diplom.data.network.posts.repository.PostRepositoryImpl
 import com.example.diplom.domain.posts.repository.PostRepository
 import com.example.diplom.domain.posts.usecase.*
+import com.example.diplom.presentation.ui.createpost.PhotosAdapter
 import org.koin.dsl.module
 
 val postsModule = module {

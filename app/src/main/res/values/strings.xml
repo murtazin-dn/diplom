@@ -33,8 +33,10 @@
 
 
     <string name="publish">Опубликовать</string>
+    <string name="attach">Прикрепить</string>
 
     <string name="prompt_email">Email</string>
+    <string name="photos_not_loaded">Дождитесь окончания загрузки фотографий</string>
 
     <string name="welcome">"Welcome!"</string>
     <string name="login_failed">"Login failed"</string>

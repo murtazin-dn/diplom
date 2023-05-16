@@ -7,11 +7,11 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.diplom.presentation.auth.signup.SignUpFragment"
+        android:name="com.example.diplom.presentation.ui.auth.signup.SignUpFragment"
         android:label="SignUpFragment" />
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.diplom.presentation.auth.signin.SignInFragment"
+        android:name="com.example.diplom.presentation.ui.auth.signin.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action

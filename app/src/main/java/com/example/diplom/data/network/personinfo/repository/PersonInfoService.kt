@@ -37,4 +37,11 @@ interface PersonInfoService {
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part
     ): Response<UserPhotoResponse>
+
+    @Multipart
+    @POST("image")
+    suspend fun uploadPhoto(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part
+    ): Response<UserPhotoResponse>
 }
