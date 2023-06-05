@@ -2,6 +2,7 @@ package com.example.diplom.presentation.ui.chats
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,18 +19,25 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestListener
 import com.example.diplom.R
 import com.example.diplom.data.network.chats.model.response.ChatPreview
+import com.example.diplom.data.network.messages.model.response.MessageType
 import com.example.diplom.databinding.FragmentChatsBinding
 import com.example.diplom.databinding.ItemChatBinding
+import com.example.diplom.presentation.MainActivity
 import com.example.diplom.presentation.common.showToast
 import com.example.diplom.presentation.common.toPhotoURL
+import com.example.diplom.presentation.common.toTimePassed
 import com.example.diplom.util.BASE_URL
 import com.example.diplom.util.CHAT_ID
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Timer
+import java.util.TimerTask
 
 class ChatsFragment : Fragment() {
 
     private var _binding: FragmentChatsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var timer: CountDownTimer
 
     private val viewModel by viewModel<ChatsViewModel>()
     private lateinit var adapter: ChatsAdapter
@@ -47,6 +55,24 @@ class ChatsFragment : Fragment() {
 
         _binding = FragmentChatsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        timer = object : CountDownTimer(20000, 2000){
+            override fun onTick(millisUntilFinished: Long) {
+                viewModel.getChats()
+            }
+            override fun onFinish() {
+                timer.start()
+            }
+        }.start()
+        MainActivity.getUnreadMessagesCount?.invoke()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timer.cancel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,7 +124,27 @@ class ChatsAdapter(private val listener: ChatsClickListener) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = currentList[position]
         with(holder){
-            binding.tvMessageTextCahtItem.text = item.lastMessageText ?: ""
+            val msgText = item.lastMessage.text
+            when(item.lastMessage.type){
+                MessageType.IN -> {
+                    binding.tvMessageTextCahtItem.text = msgText
+                    if (item.lastMessage.isRead) {
+                        binding.tvUnreadMessagesCount.visibility = View.GONE
+                    } else {
+                        binding.tvUnreadMessagesCount.visibility = View.VISIBLE
+                        binding.tvUnreadMessagesCount.text = item.unreadMessagesCount.toString()
+                    }
+
+                        if (item.lastMessage.isRead) View.GONE else View.VISIBLE
+
+                }
+                MessageType.OUT -> {
+                    binding.tvMessageTextCahtItem.text = "Вы: $msgText"
+                    binding.imgUnreadOutMessage.visibility =
+                        if (item.lastMessage.isRead) View.GONE else View.VISIBLE
+                }
+            }
+            binding.tvTimeChatItem.text = item.lastMessage.date.toTimePassed()
             binding.tvNameChatItem.text = "${item.name} ${item.surname}"
             binding.root.setOnClickListener {
                 listener.onItemClick(item)

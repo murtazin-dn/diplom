@@ -1,5 +1,6 @@
 package com.example.diplom.presentation.ui.auth.signup
 
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,12 +13,16 @@ import com.example.diplom.data.network.util.Response
 import com.example.diplom.domain.auth.usecase.IsTakenEmailUseCase
 import com.example.diplom.domain.auth.usecase.SignUpUseCase
 import com.example.diplom.domain.category.usecase.GetCategoriesUseCase
+import com.example.diplom.domain.notifications.usecase.SubscribeNotificationsUseCase
+import com.example.diplom.domain.notifications.usecase.UnsubscribeNotificationsUseCase
 import com.example.diplom.presentation.common.isEmailValid
 import com.example.diplom.presentation.common.isNameValid
 import com.example.diplom.presentation.common.toEpochSeconds
 import com.example.diplom.presentation.ui.auth.signin.SignInFragmentState
 import com.example.diplom.presentation.ui.auth.signup.model.SignUpFields
 import com.example.diplom.util.TokenService
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -27,7 +32,8 @@ import kotlinx.coroutines.launch
 class SignUpViewModel(
     private val signUpUseCase: SignUpUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val isTakenEmailUseCase: IsTakenEmailUseCase
+    private val isTakenEmailUseCase: IsTakenEmailUseCase,
+    private val subscribeNotificationsUseCase: SubscribeNotificationsUseCase
 ): ViewModel() {
     private val _state = MutableLiveData<SignUpFragmentState>()
     val state: LiveData<SignUpFragmentState> get() = _state
@@ -48,11 +54,36 @@ class SignUpViewModel(
                     is Response.Error -> _state.value =
                         SignUpFragmentState.ErrorSignUpStr(result.message)
                     is Response.Success -> {
-                        _state.value = SignUpFragmentState.SuccessSignUp(true)
+                        FirebaseMessaging.getInstance().token.addOnCompleteListener(
+                            OnCompleteListener { task ->
+                                if (!task.isSuccessful) {
+                                    Log.w(ContentValues.TAG, "Fetching FCM registration token failed", task.exception)
+                                    return@OnCompleteListener
+                                }
+
+                                val token = task.result
+                                Log.e("subscribe notification","sign in")
+                                subscribeNotifications(token)
+                            })
                     }
                 }
             }
     }
+
+
+    fun subscribeNotifications(token: String) = viewModelScope.launch {
+        Log.e("subscribe notification","view model subscribe")
+
+        subscribeNotificationsUseCase.execute(token)
+            .collect{ response ->
+                when(response){
+                    is Response.Error -> _state.value = SignUpFragmentState.ErrorSignUp(R.string.error_try_again)
+                    is Response.Success ->
+                        _state.value = SignUpFragmentState.SuccessSignUp(true)
+                }
+            }
+    }
+
 
     fun fetchCategories() = viewModelScope.launch {
         getCategoriesUseCase.execute()

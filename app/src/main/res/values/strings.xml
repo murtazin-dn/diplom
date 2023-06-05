@@ -58,4 +58,6 @@
     <string name="new_post">Новая публикация</string>
     <string name="long_title">Длина заголовка не должна превышать 200 символов</string>
     <string name="search">Поиск</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

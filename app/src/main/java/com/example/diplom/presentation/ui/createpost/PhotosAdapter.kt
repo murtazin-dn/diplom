@@ -23,6 +23,7 @@ class PhotosAdapter(
     fun addPhoto(photo: SelectedPhotoModel){
         photosList.add(photo)
         uploadPhoto(photo)
+        submitList()
     }
 
     fun reloadPhoto(photo: SelectedPhotoModel){
@@ -40,8 +41,8 @@ class PhotosAdapter(
     fun deleteAllPhotos(){
         photosList.forEach {
             it.file.delete()
-            photosList.remove(it)
         }
+        photosList = mutableListOf()
         submitList()
     }
 
@@ -49,8 +50,8 @@ class PhotosAdapter(
 
     private fun setStatePhoto(id: String, state: PhotoLoadedStatus){
         photosList = photosList.map {
-            if(it.id == id) it.status = state
-            it
+            if(it.id == id) it.copy(status = state)
+            else it
         }.toMutableList()
         submitList()
     }

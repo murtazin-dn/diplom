@@ -22,4 +22,9 @@ interface ChatService {
         @Header("Authorization") token: String,
         @Path("userId") userId: Long)
     : Response<ChatResponse>
+
+    @GET("chats/unreadcount")
+    suspend fun getCountUnreadDialogs(
+        @Header("Authorization") token: String)
+    : Response<Long>
 }

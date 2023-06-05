@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MessagesRepository {
     suspend fun getMessages(chatId: Long): Flow<Response<List<MessageResponse>>>
+    suspend fun getMessagesFromMessageId(chatId: Long, messageId: Long): Flow<Response<List<MessageResponse>>>
+    suspend fun readMessage(chatId: Long, messageId: Long): Flow<Response<Unit>>
 }

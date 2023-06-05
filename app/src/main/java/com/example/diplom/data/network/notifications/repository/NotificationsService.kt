@@ -12,4 +12,7 @@ interface NotificationsService {
     @POST("notifications/subscribe")
     suspend fun subscribe(@Header("Authorization") token: String, @Body fcmToken: FCMTokenRequest):
             Response<Unit>
+    @POST("notifications/unsubscribe")
+    suspend fun unsubscribe(@Header("Authorization") token: String, @Body fcmToken: FCMTokenRequest):
+            Response<Unit>
 }

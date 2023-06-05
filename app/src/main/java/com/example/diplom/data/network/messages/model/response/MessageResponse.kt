@@ -7,7 +7,9 @@ data class MessageResponse(
     val userId: Long,
     val text: String,
     val date: Long,
-    val type: MessageType
+    val type: MessageType,
+    val isRead: Boolean,
+    val images: MutableList<String>
 )
 enum class MessageType {
     IN, OUT

@@ -3,6 +3,7 @@ package com.example.diplom.presentation.ui.myprofile
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -280,7 +281,26 @@ class PostAdapter(private val actions: PostClickListener) :
                     .load(R.drawable.no_photo)
                     .into(binding.iconPerson)
             }
+            val list = listOf(
+                binding.imgPostImage1,
+                binding.imgPostImage2,
+                binding.imgPostImage3,
+                binding.imgPostImage4,
+                binding.imgPostImage5,
+                binding.imgPostImage6,
+                binding.imgPostImage7,
+                binding.imgPostImage8,
+                binding.imgPostImage9
+            )
 
+            for(i in 0 until item.images.size){
+                list[i].visibility = View.VISIBLE
+                Glide
+                    .with(holder.itemView.context)
+                    .load(item.images[i].toPhotoURL())
+                    .into(list[i])
+                if (i == 8) break
+            }
             println("bind view holder")
         }
     }

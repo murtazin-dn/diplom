@@ -59,6 +59,7 @@ class SelectedPhotosAdapter(private val actions: SelectedPhotoActions) : ListAda
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        println("bindPhoto")
         val item = getItem(position)
         when(holder){
             is ViewHolderLoaded -> {

@@ -81,7 +81,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun hideChatToolbar(){
-        showBottomMenu()
         chatToolbar.visibility = View.GONE
         toolbar.visibility = View.VISIBLE
         setSupportActionBar(toolbar)
@@ -93,7 +92,6 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun showChatToolbar(){
-        hideBottomMenu()
         chatToolbar.visibility = View.VISIBLE
         toolbar.visibility = View.GONE
         setSupportActionBar(chatToolbar)
@@ -128,6 +126,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object{
+        var getUnreadMessagesCount: GetUnreadMessagesCount? = null
         var currentChatId: Long? = null
     }
 }
@@ -140,6 +139,9 @@ fun interface ShowBottomNavMenu{
 }
 fun interface SearchToolbar{
     fun invoke(text: String)
+}
+fun interface GetUnreadMessagesCount{
+    fun invoke()
 }
 
 interface NewsNavigation{

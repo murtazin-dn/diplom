@@ -22,4 +22,15 @@ class NotificationsRepositoryImpl(
             }
         }
     }
+    override suspend fun unsubscribe(token: String): Flow<Response<Unit>> {
+        return flow{
+            val userToken = tokenService.getToken()
+            val response = notificationsService.unsubscribe("Bearer $userToken", FCMTokenRequest(token))
+            if(response.isSuccessful){
+                emit(Response.Success(Unit))
+            }else{
+                emit(Response.Error(response.code(), response.errorBody().toString()))
+            }
+        }
+    }
 }

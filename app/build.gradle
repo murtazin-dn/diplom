@@ -63,6 +63,9 @@ dependencies {
     //coreLibraryDesugaring
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
 
+    //PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
     //Koin
     implementation "io.insert-koin:koin-android:3.3.3"
 

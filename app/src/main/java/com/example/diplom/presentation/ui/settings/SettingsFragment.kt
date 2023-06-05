@@ -38,6 +38,14 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.title_settings)
+
+        viewModel.state.observe(viewLifecycleOwner){ state ->
+            when(state){
+                is SettingsStateUi.Logout -> Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main)
+                    .navigate(R.id.action_mainFragment_to_auth_navigation)
+            }
+        }
+
         setMenuToolbar()
         setOnBackPressed()
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
@@ -49,9 +57,7 @@ class SettingsFragment : Fragment() {
             }
         )
         binding.btnLogout.setOnClickListener {
-            viewModel.clearToken()
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main)
-                .navigate(R.id.action_mainFragment_to_auth_navigation)
+            viewModel.logout()
         }
     }
 

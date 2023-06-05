@@ -1,5 +1,7 @@
 package com.example.diplom.presentation.ui.createpost
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,6 +24,8 @@ import com.example.diplom.R
 import com.example.diplom.data.network.categories.model.response.CategoryResponse
 import com.example.diplom.databinding.FragmentCreatePostBinding
 import com.example.diplom.presentation.MainActivity
+import com.example.diplom.presentation.common.calculateInSampleSize
+import com.example.diplom.presentation.common.decodeSampledBitmapFromResource
 import com.example.diplom.presentation.common.showToast
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -54,14 +58,33 @@ class CreatePostFragment : Fragment() {
                 val fileName = UUID.randomUUID().toString()
                 val file = File(requireContext().getCacheDir(), "$fileName.png")
                 try {
-                    val instream: InputStream =
-                        requireContext().getContentResolver().openInputStream(uri)!!
+                    var instream: InputStream =
+                        requireContext().contentResolver.openInputStream(uri)!!
                     val output = FileOutputStream(file)
-                    val buffer = ByteArray(1024)
-                    var size: Int
-                    while (instream.read(buffer).also { size = it } != -1) {
-                        output.write(buffer, 0, size)
+
+                    var sampleSize = 0
+                    BitmapFactory.Options().run {
+                        inJustDecodeBounds = true
+                        BitmapFactory.decodeStream(instream, null, this)
+                        sampleSize = calculateInSampleSize(this, 768, 1024)
                     }
+                    instream.close()
+
+                    instream = requireContext().contentResolver.openInputStream(uri)!!
+                    val bitmap = BitmapFactory.Options().run {
+                        inJustDecodeBounds = false
+                        inSampleSize = sampleSize
+                        BitmapFactory.decodeStream(instream, null, this)
+                    }
+
+
+                    bitmap?.compress(Bitmap.CompressFormat.PNG, 0, output) ?: throw RuntimeException("bitmap null")
+
+//                    val buffer = ByteArray(1024)
+//                    var size: Int
+//                    while (instream.read(buffer).also { size = it } != -1) {
+//                        output.write(buffer, 0, size)
+//                    }
                     instream.close()
                     output.close()
                     viewModel.addPhoto(SelectedPhotoModel(id = fileName, file = file))

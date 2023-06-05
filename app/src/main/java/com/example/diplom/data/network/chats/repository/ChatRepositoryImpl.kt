@@ -50,4 +50,17 @@ class ChatRepositoryImpl(
             }
         }
     }
+
+    override suspend fun getUnreadDialogsCount(): Flow<Response<Long>> {
+        return flow{
+            val token = tokenService.getToken()
+            val response = chatService.getCountUnreadDialogs("Bearer $token")
+            if(response.isSuccessful){
+                val body = response.body()!!
+                emit(Response.Success(body))
+            }else{
+                emit(Response.Error(response.code(), response.errorBody().toString()))
+            }
+        }
+    }
 }

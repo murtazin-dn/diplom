@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface NotificationsRepository {
     suspend fun subscribe(token: String): Flow<Response<Unit>>
+    suspend fun unsubscribe(token: String): Flow<Response<Unit>>
 }

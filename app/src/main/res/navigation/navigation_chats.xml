@@ -18,5 +18,13 @@
         android:name="com.example.diplom.presentation.ui.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat">
+        <action
+            android:id="@+id/action_chatFragment_to_photoViewPagerFragment"
+            app:destination="@id/photoViewPagerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/photoViewPagerFragment"
+        android:name="com.example.diplom.presentation.ui.photoview.PhotoViewPagerFragment"
+        android:label="fragment_photo_view_pager"
+        tools:layout="@layout/fragment_photo_view_pager" />
 </navigation>

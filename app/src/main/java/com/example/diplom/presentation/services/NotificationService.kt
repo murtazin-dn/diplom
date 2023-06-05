@@ -52,6 +52,7 @@ class NotificationService : FirebaseMessagingService() {
             Log.e("msg", MainActivity.currentChatId.toString())
             if(MainActivity.currentChatId == msg.chat.id) return
             if(!isMyId.isMyUserId(msg.chat.firstUserId)) return
+            MainActivity.getUnreadMessagesCount?.invoke()
             val person = createPerson(msg)
             val messageArrivalTime = System.currentTimeMillis()
 

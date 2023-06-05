@@ -6,6 +6,7 @@ import com.example.diplom.domain.chats.repository.ChatRepository
 import com.example.diplom.domain.chats.usecase.GetChatByChatIdUseCase
 import com.example.diplom.domain.chats.usecase.GetChatByUserIdUseCase
 import com.example.diplom.domain.chats.usecase.GetChatsUseCase
+import com.example.diplom.domain.chats.usecase.GetUnreadDialogsCountUseCase
 import org.koin.dsl.module
 
 val chatModule = module {
@@ -13,5 +14,6 @@ val chatModule = module {
     single{GetChatsUseCase(chatRepository = get())}
     single{GetChatByChatIdUseCase(chatRepository = get())}
     single{ GetChatByUserIdUseCase(chatRepository = get()) }
+    single{ GetUnreadDialogsCountUseCase(chatRepository = get()) }
     factory { WebSocketClient(tokenService = get()) }
 }

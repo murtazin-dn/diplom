@@ -9,4 +9,5 @@ interface ChatRepository {
     suspend fun getMyChats(): Flow<Response<List<ChatPreview>>>
     suspend fun getChatByChatId(chatId: Long): Flow<Response<ChatResponse>>
     suspend fun getChatByUserId(userId: Long): Flow<Response<ChatResponse>>
+    suspend fun getUnreadDialogsCount(): Flow<Response<Long>>
 }
